@@ -14,7 +14,13 @@ class Role extends Model
     protected $fillable = [
         'role_name',
         'role_description',
+        'role_salary',
         'role_status',
+    ];
+
+    protected $casts = [
+        'role_salary' => 'decimal:2',
+        'role_status' => 'boolean',
     ];
 
     protected static function booted()

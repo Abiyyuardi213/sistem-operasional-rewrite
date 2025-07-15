@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('role_name');
             $table->text('role_description');
-            $table->string('role_salary');
+            $table->decimal('role_salary', 12, 2);
             $table->boolean('role_status');
             $table->timestamps();
         });

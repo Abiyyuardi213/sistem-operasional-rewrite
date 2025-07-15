@@ -24,11 +24,11 @@
             </div>
             <div class="info">
                 <a href="#" class="d-block text-white font-weight-bold">
-                    #
+                    Nama User
                 </a>
                 <span class="badge badge-success">Online</span>
                 <span class="d-block" style="color: #f39c12; font-size: 14px; font-weight: 600;">
-                    #
+                    Status Online
                 </span>
             </div>
         </div>
@@ -36,17 +36,45 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" data-accordion="false" role="menu">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-warehouse"></i>
+                    <a href="{{ url('dashboard') }}" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard Utama</p>
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-user-shield"></i>
-                        <p>Peran</p>
+                @php
+                    $isPeranPengguna = request()->is('dashboard-peran*') ||
+                                request()->is('role*') ||
+                                request()->is('user*');
+                @endphp
+                <li class="nav-item has-treeview {{ $isPeranPengguna ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ $isPeranPengguna ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-folder-open"></i>
+                        <p>
+                            Peran Pengguna
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
                     </a>
+                    <ul class="nav nav-treeview" style="{{ $isPeranPengguna ? 'display: block;' : '' }}">
+                        <li class="nav-item">
+                            <a href="{{ url('dashboard-peran') }}" class="nav-link">
+                                <i class="nav-icon fas fa-warehouse"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('role') }}" class="nav-link">
+                                <i class="nav-icon fas fa-user-shield"></i>
+                                <p>Master Peran</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('user') }}" class="nav-link">
+                                <i class="nav-icon fas fa-users-cog"></i>
+                                <p>Master Pengguna</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </nav>

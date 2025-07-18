@@ -57,6 +57,11 @@ class Role extends Model
         return $this->delete();
     }
 
+    public function users()
+    {
+        return $this->hasMany(User::class, 'role_id');
+    }
+
     public function toggleStatus()
     {
         $this->role_status = !$this->role_status;

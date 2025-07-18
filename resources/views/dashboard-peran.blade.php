@@ -13,6 +13,16 @@
         body {
             font-family: 'Source Sans Pro', sans-serif !important;
         }
+        .hero-header {
+            background: linear-gradient(to right, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 3rem 1rem;
+        }
+        .info-card-wrapper {
+            margin-top: -2rem;
+            z-index: 10;
+            position: relative;
+        }
     </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -21,25 +31,20 @@
     @include('include.sidebar')
 
     <div class="content-wrapper">
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard Peran dan Pengguna</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ url('dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard Peran & Pengguna</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <section class="content">
+        <!-- Hero Header Section -->
+        <section class="hero-header">
+            <div class="container-fluid">
+                <h1 class="display-6 font-weight-bold">Dashboard Peran & Pengguna</h1>
+                <p class="mb-0">Statistik manajemen akses dan akun pengguna sistem</p>
+            </div>
+        </section>
+
+        <!-- Info Box Section -->
+        <section class="content info-card-wrapper">
             <div class="container-fluid">
                 <div class="row">
+
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-info">
                             <div class="inner">
@@ -49,7 +54,7 @@
                             <div class="icon">
                                 <i class="fas fa-user-tag"></i>
                             </div>
-                            <a href="{{ url('role') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="{{ url('role') }}" class="small-box-footer">Lihat Detail <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
 
@@ -62,9 +67,10 @@
                             <div class="icon">
                                 <i class="fas fa-user-friends"></i>
                             </div>
-                            <a href="{{ url('pengguna') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="{{ url('pengguna') }}" class="small-box-footer">Lihat Detail <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>

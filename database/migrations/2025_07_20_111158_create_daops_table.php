@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('daops', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('nama_daop')->unique();
-            $table->foreignUuid('kota_id')->constrained('kota')->onDelete('cascade');
+            $table->text('deskripsi')->nullable();
             $table->string('alamat')->nullable();
             $table->string('telepon')->nullable();
             $table->boolean('status')->default(true);

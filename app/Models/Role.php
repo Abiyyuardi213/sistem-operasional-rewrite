@@ -46,7 +46,7 @@ class Role extends Model
     {
         $this->update([
             'role_name' => $data['role_name'],
-            'role_description' => $data['role_description'] ?? $this->role_description,
+            'role_description' => $data['role_description'],
             'role_salary' => $data['role_salary'] ?? $this->role_salary,
             'role_status' => $data['role_status'] ?? $this->role_status,
         ]);

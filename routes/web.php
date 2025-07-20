@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DaopsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardMasterController;
 use App\Http\Controllers\DashboardPeranController;
@@ -34,3 +35,6 @@ Route::resource('kota', KotaController::class);
 
 Route::post('kantor/{id}/toggle-status', [KantorController::class, 'toggleStatus'])->name('kantor.toggleStatus');
 Route::resource('kantor', KantorController::class);
+
+Route::post('daop/{id}/toggle-status', [DaopsController::class, 'toggleStatus'])->name('daop.toggleStatus');
+Route::resource('daop', DaopsController::class);

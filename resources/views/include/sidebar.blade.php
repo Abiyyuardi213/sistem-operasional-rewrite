@@ -106,6 +106,12 @@
                                 <p>Master Kantor</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ url('daop') }}" class="nav-link">
+                                <i class="fas fa-route nav-icon text-secondary"></i>
+                                <p>Master Daop</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>

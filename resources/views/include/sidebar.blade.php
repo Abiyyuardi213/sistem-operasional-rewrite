@@ -69,7 +69,8 @@
                 @php
                     $isMasterData = request()->is('dashboard-master*') ||
                                     request()->is('pulau*') ||
-                                    request()->is('kota*');
+                                    request()->is('kota*') ||
+                                    request()->is('kantor*');
                 @endphp
                 <li class="nav-item has-treeview {{ $isMasterData ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ $isMasterData ? 'active' : '' }}">
@@ -97,6 +98,12 @@
                             <a href="{{ url('kota') }}" class="nav-link">
                                 <i class="fas fa-city nav-icon text-secondary"></i>
                                 <p>Master Kota</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('kantor') }}" class="nav-link">
+                                <i class="fas fa-building nav-icon text-secondary"></i>
+                                <p>Master Kantor</p>
                             </a>
                         </li>
                     </ul>

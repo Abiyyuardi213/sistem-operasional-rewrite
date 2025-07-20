@@ -120,7 +120,7 @@
 
                 <!-- Master Admin Card -->
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="small-box bg-info">
                             <div class="inner">
                                 <h3>Master Admin</h3>

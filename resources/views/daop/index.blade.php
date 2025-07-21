@@ -31,13 +31,13 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h3 class="card-title">Daftar Daerah Operasi</h3>
-                        <a href="#" class="btn btn-primary btn-sm ml-auto" data-toggle="modal" data-target="#addKantorModal">
+                        <a href="#" class="btn btn-primary btn-sm ml-auto" data-toggle="modal" data-target="#addDaopModal">
                             <i class="fas fa-plus"></i> Tambah Daerah Operasi
                         </a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="daopTable" class="table table-bordered table-striped">
+                            <table id="daopTable" class="table table-bordered table-striped w-100">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -46,6 +46,7 @@
                                         <th>Alamat</th>
                                         <th>Telepon</th>
                                         <th>Status</th>
+                                        <th class="text-center" style="width: 120px;">Aksi</th> <!-- Tambah kolom aksi -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -61,11 +62,11 @@
                                                     {{ $daop->status ? 'Aktif' : 'Nonaktif' }}
                                                 </span>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <button class="btn btn-warning btn-sm edit-daop-btn"
                                                     data-id="{{ $daop->id }}"
                                                     data-nama="{{ $daop->nama_daop }}"
-                                                    data-jenis="{{ $daop->deskripsi }}"
+                                                    data-deskripsi="{{ $daop->deskripsi }}"
                                                     data-alamat="{{ $daop->alamat }}"
                                                     data-telepon="{{ $daop->telepon }}"
                                                     data-status="{{ $daop->status }}"
@@ -125,6 +126,19 @@
                         <label>Telepon</label>
                         <input type="text" name="telepon" class="form-control">
                     </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="status" value="1" checked>
+                                <label class="form-check-label">Aktif</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="status" value="0">
+                                <label class="form-check-label">Nonaktif</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Simpan</button>
@@ -135,45 +149,46 @@
 </div>
 
 <!-- Modal Edit Daop -->
-<div class="modal fade" id="editKantorModal" tabindex="-1">
+<div class="modal fade" id="editDaopModal" tabindex="-1">
     <div class="modal-dialog">
-        <form method="POST" id="editKantorForm">
+        <form method="POST" id="editDaopForm">
             @csrf
             @method('PUT')
             <div class="modal-content">
                 <div class="modal-header bg-warning text-white">
-                    <h5 class="modal-title">Edit Kantor</h5>
+                    <h5 class="modal-title">Edit Daop</h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="id" id="edit_id">
                     <div class="form-group">
-                        <label>Nama Kantor</label>
-                        <input type="text" name="nama_kantor" id="edit_nama" class="form-control" required>
+                        <label>Nama Daop</label>
+                        <input type="text" name="nama_daop" id="edit_nama" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="jenis">Jenis Kantor</label>
-                        <select name="jenis" id="edit_jenis" class="form-control" required>
-                            @foreach ($jenisList as $key => $label)
-                                <option value="{{ $key }}">{{ $label }}</option>
-                            @endforeach
-                        </select>
+                        <label>Deskripsi</label>
+                        <textarea name="deskripsi" id="edit_deskripsi" class="form-control" required></textarea>
                     </div>
                     <div class="form-group">
                         <label>Alamat</label>
                         <textarea name="alamat" id="edit_alamat" class="form-control" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label>Kota</label>
-                        <select name="kota_id" id="edit_kota_id" class="form-control" required>
-                            @foreach($kotas as $kota)
-                                <option value="{{ $kota->id }}">{{ $kota->kota }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label>Telepon</label>
                         <input type="text" name="telepon" id="edit_telepon" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="status" id="edit_status_aktif" value="1">
+                                <label class="form-check-label" for="edit_status_aktif">Aktif</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="status" id="edit_status_nonaktif" value="0">
+                                <label class="form-check-label" for="edit_status_nonaktif">Nonaktif</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -204,24 +219,32 @@
     });
 
     $(document).ready(function () {
-        $('#kantorTable').DataTable();
+        $('#daopTable').DataTable();
 
-        $('.edit-kantor-btn').on('click', function () {
+        $('.edit-daop-btn').on('click', function () {
             const id = $(this).data('id');
             const nama = $(this).data('nama');
-            const jenis = $(this).data('jenis');
+            const deskripsi = $(this).data('deskripsi');
             const alamat = $(this).data('alamat');
-            const kota_id = $(this).data('kota_id');
             const telepon = $(this).data('telepon');
+            const status = $(this).data('status'); // status: 1 atau 0
 
+            // Isi form input
             $('#edit_id').val(id);
             $('#edit_nama').val(nama);
-            $('#edit_jenis').val(jenis);
+            $('#edit_deskripsi').val(deskripsi);
             $('#edit_alamat').val(alamat);
-            $('#edit_kota_id').val(kota_id);
             $('#edit_telepon').val(telepon);
 
-            $('#editKantorForm').attr('action', `/kantor/${id}`);
+            // Atur status radio button
+            if (status == 1) {
+                $('#edit_status_aktif').prop('checked', true);
+            } else {
+                $('#edit_status_nonaktif').prop('checked', true);
+            }
+
+            // Set form action
+            $('#editDaopForm').attr('action', `/daop/${id}`);
         });
     });
 </script>

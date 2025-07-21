@@ -71,7 +71,7 @@ class DaopsController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Status role berhasil diperbarui.'
+                'message' => 'Status daop berhasil diperbarui.'
             ]);
         } catch (\Exception $e) {
             return response()->json([

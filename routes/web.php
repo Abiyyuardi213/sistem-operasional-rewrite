@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BalaiYasaController;
 use App\Http\Controllers\DaopsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardMasterController;
@@ -38,3 +39,6 @@ Route::resource('kantor', KantorController::class);
 
 Route::post('daop/{id}/toggle-status', [DaopsController::class, 'toggleStatus'])->name('daop.toggleStatus');
 Route::resource('daop', DaopsController::class);
+
+Route::post('balai-yasa/{id}/toggle-status', [BalaiYasaController::class, 'toggleStatus'])->name('balai-yasa.toggleStatus');
+Route::resource('balai-yasa', BalaiYasaController::class);

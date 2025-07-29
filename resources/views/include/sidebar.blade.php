@@ -73,7 +73,8 @@
                                     request()->is('kantor*') ||
                                     request()->is('daop*') ||
                                     request()->is('balai-yasa*') ||
-                                    request()->is('kategori-resort*');
+                                    request()->is('kategori-resort*') ||
+                                    request()->is('resort*');
                 @endphp
                 <li class="nav-item has-treeview {{ $isMasterData ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ $isMasterData ? 'active' : '' }}">
@@ -125,6 +126,12 @@
                             <a href="{{ url('kategori-resort') }}" class="nav-link">
                                 <i class="fas fa-th-large nav-icon text-secondary"></i>
                                 <p>Master Kategori Resort</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('resort') }}" class="nav-link">
+                                <i class="fas fa-tools nav-icon text-secondary"></i>
+                                <p>Master Resort</p>
                             </a>
                         </li>
                     </ul>

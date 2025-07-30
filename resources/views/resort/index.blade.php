@@ -57,7 +57,10 @@
                                                 <td>{{ $resort->kepala_resort }}</td>
                                                 <td>{{ $resort->telepon }}</td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('resort.edit', $resort->id) }}" class="btn btn-info btn-sm">
+                                                    <a href="{{ route('resort.show', $resort->id) }}" class="btn btn-info btn-sm">
+                                                        <i class="fas fa-eye"></i> Detail
+                                                    </a>
+                                                    <a href="{{ route('resort.edit', $resort->id) }}" class="btn btn-warning btn-sm">
                                                         <i class="fas fa-edit"></i> Edit
                                                     </a>
                                                     <button class="btn btn-danger btn-sm delete-resort-btn"

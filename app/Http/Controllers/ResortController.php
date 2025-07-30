@@ -42,9 +42,10 @@ class ResortController extends Controller
     public function edit($id)
     {
         $resort = Resort::findOrFail($id);
-        $kategoris = KategoriResort::all();
+        $kategoris = KategoriResort::where('status', 1)->get();
         $kotas = Kota::all();
-        return view('resort.index', compact('resort', 'kategoris'));
+
+        return view('resort.edit', compact('resort', 'kategoris', 'kotas'));
     }
 
     public function update(Request $request, $id)
@@ -70,5 +71,11 @@ class ResortController extends Controller
         $resort->deleteResort();
 
         return redirect()->route('resort.index')->with('success', 'Resort berhasil dihapus.');
+    }
+
+    public function show($id)
+    {
+        $resort = Resort::with('kategori_resort', 'kota')->findOrFail($id);
+        return view('resort.show', compact('resort')); // BUKAN 'balai'
     }
 }

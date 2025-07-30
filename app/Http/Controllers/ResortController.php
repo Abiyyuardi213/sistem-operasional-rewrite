@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\KategoriResort;
+use App\Models\Kota;
 use App\Models\Resort;
 use Illuminate\Http\Request;
 
@@ -18,14 +19,15 @@ class ResortController extends Controller
     public function create()
     {
         $kategoris = KategoriResort::where('status', 1)->get();
-        return view('resort.create', compact('kategoris'));
+        $kotas = Kota::all();
+        return view('resort.create', compact('kategoris', 'kotas'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'kategori_id' => 'required|exists:kategori_resort,id',
-            'nama_resort' => 'required|string|max:255|unique:kategori_resort,nama_resort',
+            'nama_resort' => 'required|string|max:255|unique:resort,nama_resort',
             'kota_id' => 'required|exists:kota,id',
             'alamat' => 'nullable|string',
             'kepala_resort' => 'nullable|string',
@@ -41,6 +43,7 @@ class ResortController extends Controller
     {
         $resort = Resort::findOrFail($id);
         $kategoris = KategoriResort::all();
+        $kotas = Kota::all();
         return view('resort.index', compact('resort', 'kategoris'));
     }
 

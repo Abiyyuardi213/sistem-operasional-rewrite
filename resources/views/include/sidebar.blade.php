@@ -12,12 +12,19 @@
         <!-- User Info -->
         <div class="user-panel d-flex align-items-center mb-3 px-3">
             <div class="image">
-                <img src="#" class="img-circle elevation-2" alt="User Image"
-                     style="width: 40px; height: 40px; object-fit: cover;">
+                <img src="{{ asset('uploads/profile/' . (Auth::user()->profile_picture ?? 'default.png')) }}"
+                    class="img-circle elevation-2"
+                    alt="User Image"
+                    style="width: 45px; height: 45px; object-fit: cover; border: 2px solid white;">
             </div>
             <div class="info ml-2">
-                <a href="#" class="d-block text-dark font-weight-bold">Nama User</a>
+                <a href="#" class="d-block text-dark font-weight-bold">
+                    {{ Auth::user()->username }}
+                </a>
                 <span class="badge badge-success">Online</span>
+                <span class="d-block" style="color: #f39c12; font-size: 14px; font-weight: 600;">
+                    {{ Auth::user()->role->role_name ?? 'Unknown' }}
+                </span>
             </div>
         </div>
 

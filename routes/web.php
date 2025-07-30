@@ -19,12 +19,13 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('login', [AuthController::class, 'login']);
-Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login')->middleware('guest');
+Route::post('/login', [AuthController::class, 'login'])->name('login.attempt');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+    // Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::middleware('checkRole:admin')->group(function () {
         Route::resource('user', UserController::class);

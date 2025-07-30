@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
 class KategoriResort extends Model
 {
+    use SoftDeletes;
     protected $table = 'kategori_resort';
     protected $keyType = 'string';
     public $incrementing = false;

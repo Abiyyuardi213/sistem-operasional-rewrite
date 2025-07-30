@@ -32,30 +32,34 @@
             <div class="container-fluid">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-plus-circle"></i> Form Tambah Balai Yasa</h3>
+                        <h3 class="card-title"><i class="fas fa-plus-circle"></i> Form Tambah Data Resort</h3>
                     </div>
                     <div class="card-body">
                         @if(session('error'))
                             <div class="alert alert-danger">{{ session('error') }}</div>
                         @endif
 
-                        <form action="{{ route('balai-yasa.store') }}" method="POST">
+                        <form action="{{ route('resort.store') }}" method="POST">
                             @csrf
 
                             <div class="form-group">
-                                <label for="nama_balai">Nama Balai</label>
-                                <input type="text" class="form-control @error('nama_balai') is-invalid @enderror"
-                                       name="nama_balai" value="{{ old('nama_balai') }}" required placeholder="Masukkan nama balai yasa" autocomplete="off">
-                                @error('nama_balai')
+                                <label for="kategori_id">Kategori Resort</label>
+                                <select name="kategori_id" id="kategori_id" class="form-control @error('kategori_id') is-invalid @enderror">
+                                    <option value="">-- Pilih Kategori --</option>
+                                    @foreach($kategoris as $kategori)
+                                        <option value="{{ $kategori->id }}" {{ old('kategori_id') == $kategori->id ? 'selected' : '' }}>{{ $kategori->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('kategori_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="form-group">
-                                <label for="deskripsi">Deskripsi</label>
-                                <textarea class="form-control @error('deskripsi') is-invalid @enderror"
-                                          name="deskripsi" placeholder="Masukkan deskripsi balai yasa">{{ old('deskripsi') }}</textarea>
-                                @error('deskripsi')
+                                <label for="nama_resort">Nama Resort</label>
+                                <input type="text" class="form-control @error('nama_resort') is-invalid @enderror"
+                                       name="nama_resort" value="{{ old('nama_resort') }}" required placeholder="Masukkan nama resort" autocomplete="off">
+                                @error('nama_resort')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -74,10 +78,19 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="alamat">Alamat</label>
+                                <label for="alamat">Alamat Resort</label>
                                 <textarea class="form-control @error('alamat') is-invalid @enderror"
-                                          name="alamat" placeholder="Masukkan alamat balai yasa">{{ old('alamat') }}</textarea>
+                                          name="alamat" placeholder="Masukkan alamat resort">{{ old('alamat') }}</textarea>
                                 @error('alamat')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="kepala_resort">Kepala Resort</label>
+                                <input type="text" class="form-control @error('kepala_resort') is-invalid @enderror"
+                                       name="kepala_resort" value="{{ old('kepala_resort') }}" required placeholder="Masukkan nama kepala resort" autocomplete="off">
+                                @error('kepala_resort')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -91,33 +104,11 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
-                                <label for="kepala_balai">Kepala Balai</label>
-                                <input type="text" class="form-control @error('kepala_balai') is-invalid @enderror"
-                                       name="kepala_balai" value="{{ old('kepala_balai') }}" placeholder="Masukkan nama kepala balai (opsional)">
-                                @error('kepala_balai')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="status">Status</label>
-                                <select class="form-control @error('status') is-invalid @enderror"
-                                        name="status" required>
-                                    <option value="">-- Pilih Status --</option>
-                                    <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>Aktif</option>
-                                    <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>Nonaktif</option>
-                                </select>
-                                @error('status')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
                             <div class="mt-4">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fas fa-save"></i> Simpan
                                 </button>
-                                <a href="{{ route('balai-yasa.index') }}" class="btn btn-secondary">Batal</a>
+                                <a href="{{ route('resort.index') }}" class="btn btn-secondary">Batal</a>
                             </div>
                         </form>
                     </div>

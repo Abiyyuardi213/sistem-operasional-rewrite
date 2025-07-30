@@ -43,84 +43,52 @@
     <div class="background-overlay"></div>
 
     <div class="login-box">
-        {{-- Card --}}
         <div class="card">
             <div class="card-body login-card-body">
-
-                {{-- Logo di dalam card --}}
                 <div class="text-center mb-3">
                     <a href="#">
-                        <img src="{{ asset('image/kai.png') }}" alt="Logo KAI" style="height: 40px;">
+                        <img src="{{ asset('image/kai.png') }}" alt="Logo PT KAI" style="height: 40px;">
                     </a>
                 </div>
+                <p class="login-box-msg">Silakan login untuk masuk</p>
 
-                <h4 class="login-box-msg text-dark">Login Admin PT. KAI</h4>
-                <p class="text-center text-muted mb-4">Masuk untuk kelola manajemen lingkup PT. KAI</p>
-
-                {{-- Flash error --}}
-                @if (session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif
-
-                {{-- Validation error --}}
                 @if ($errors->any())
                     <div class="alert alert-danger">
-                        <strong>{{ $errors->first() }}</strong>
+                    <strong>{{ $errors->first() }}</strong>
                     </div>
                 @endif
 
-                {{-- Form login --}}
-                <form action="{{ route('login') }}" method="POST">
+                <form action="{{ route('login.attempt') }}" method="POST">
                     @csrf
 
-                    {{-- Username --}}
                     <div class="input-group mb-3">
-                        <input type="text" name="username" class="form-control @error('username') is-invalid @enderror"
-                               placeholder="Username" value="{{ old('username') }}" required autofocus>
+                        <input type="text" name="username" class="form-control" placeholder="Username atau Email" value="{{ old('login') }}" required autofocus>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
-                        @error('username')
-                            <div class="invalid-feedback d-block text-danger">
-                                {{ $message }}
-                            </div>
-                        @enderror
                     </div>
 
-                    {{-- Password --}}
                     <div class="input-group mb-3">
-                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                               placeholder="Password" required>
+                        <input type="password" name="password" class="form-control" placeholder="Password" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
-                        @error('password')
-                            <div class="invalid-feedback d-block text-danger">
-                                {{ $message }}
-                            </div>
-                        @enderror
                     </div>
 
-                    {{-- Tombol login --}}
                     <div class="row">
                         <div class="col-8"></div>
                         <div class="col-4">
-                            <button type="submit" class="btn btn-warning btn-block text-dark">Masuk</button>
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
                         </div>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
-
-    {{-- Script --}}
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>

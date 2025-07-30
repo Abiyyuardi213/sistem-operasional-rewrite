@@ -67,4 +67,9 @@ class Resort extends Model
     {
         return $this->belongsTo(Kota::class, 'kota_id')->withTrashed();
     }
+
+    public function kategori_resort()
+    {
+        return $this->belongsTo(KategoriResort::class, 'kategori_id')->withTrashed();
+    }
 }

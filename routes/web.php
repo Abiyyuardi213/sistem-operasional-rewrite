@@ -6,6 +6,7 @@ use App\Http\Controllers\DaopsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardMasterController;
 use App\Http\Controllers\DashboardPeranController;
+use App\Http\Controllers\DipoLokomotifController;
 use App\Http\Controllers\KantorController;
 use App\Http\Controllers\KategoriResortController;
 use App\Http\Controllers\KotaController;
@@ -25,7 +26,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
-    // Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::middleware('checkRole:admin')->group(function () {
         Route::resource('user', UserController::class);
@@ -55,4 +55,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('kategori-resort', KategoriResortController::class);
 
     Route::resource('resort', ResortController::class);
+
+    Route::post('dipo-lokomotif/{id}/toggle-status', [DipoLokomotifController::class, 'toggleStatus'])->name('dipo-lokomotif.toggleStatus');
+    Route::resource('dipo-lokomotif', DipoLokomotifController::class);
 });

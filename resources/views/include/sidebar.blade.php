@@ -143,6 +143,41 @@
                         </li>
                     </ul>
                 </li>
+
+                @php
+                    $isMasterDipo = request()->is('dashboard-dipo*') ||
+                                    request()->is('dipo-lokomotif*');
+                @endphp
+                <li class="nav-item has-treeview {{ $isMasterDipo ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ $isMasterDipo ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-folder-open text-primary"></i>
+                        <p>
+                            Master Dipo
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+
+                    <ul class="nav nav-treeview" style="{{ $isMasterDipo ? 'display:block;' : '' }}">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-columns nav-icon text-secondary"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('dipo-lokomotif') }}" class="nav-link">
+                                <i class="fas fa-train nav-icon text-secondary"></i>
+                                <p>Master Dipo Lokomotif</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-subway nav-icon text-secondary"></i>
+                                <p>Master Dipo Kereta</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     </div>

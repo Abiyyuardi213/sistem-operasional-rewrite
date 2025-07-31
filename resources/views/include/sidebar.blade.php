@@ -74,7 +74,7 @@
                 </li>
 
                 @php
-                    $isMasterData = request()->is('dashboard-master*') ||
+                    $isMasterData = request()->is('dashboard-master') ||
                                     request()->is('pulau*') ||
                                     request()->is('kota*') ||
                                     request()->is('kantor*') ||
@@ -145,8 +145,9 @@
                 </li>
 
                 @php
-                    $isMasterDipo = request()->is('dashboard-dipo*') ||
-                                    request()->is('dipo-lokomotif*');
+                    $isMasterDipo = request()->is('dashboard-master-dipo*') ||
+                                    request()->is('dipo-lokomotif*') ||
+                                    request()->is('dipo-kereta*');
                 @endphp
                 <li class="nav-item has-treeview {{ $isMasterDipo ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ $isMasterDipo ? 'active' : '' }}">
@@ -159,7 +160,7 @@
 
                     <ul class="nav nav-treeview" style="{{ $isMasterDipo ? 'display:block;' : '' }}">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ url('dashboard-master-dipo') }}" class="nav-link">
                                 <i class="fas fa-columns nav-icon text-secondary"></i>
                                 <p>Dashboard</p>
                             </a>
@@ -171,7 +172,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ url('dipo-kereta') }}" class="nav-link">
                                 <i class="fas fa-subway nav-icon text-secondary"></i>
                                 <p>Master Dipo Kereta</p>
                             </a>

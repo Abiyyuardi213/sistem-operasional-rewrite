@@ -43,7 +43,7 @@
                             @csrf
 
                             <div class="form-group">
-                                <label for="nama_dipo">Nama Balai</label>
+                                <label for="nama_dipo">Nama Dipo</label>
                                 <input type="text" class="form-control @error('nama_dipo') is-invalid @enderror"
                                        name="nama_dipo" value="{{ old('nama_dipo') }}" required placeholder="Masukkan nama dipo lokomotif" autocomplete="off">
                                 @error('nama_dipo')

@@ -4,8 +4,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BalaiYasaController;
 use App\Http\Controllers\DaopsController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardDipoController;
 use App\Http\Controllers\DashboardMasterController;
 use App\Http\Controllers\DashboardPeranController;
+use App\Http\Controllers\DipoKeretaController;
 use App\Http\Controllers\DipoLokomotifController;
 use App\Http\Controllers\KantorController;
 use App\Http\Controllers\KategoriResortController;
@@ -36,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('dashboard-peran', [DashboardPeranController::class, 'index'])->name('dashboard-peran');
     Route::get('dashboard-master', [DashboardMasterController::class, 'index'])->name('dashboard-master');
+    Route::get('dashboard-master-dipo', [DashboardDipoController::class, 'index'])->name('dashboard-master-dipo');
 
     Route::post('pulau/{id}/toggle-status', [PulauController::class, 'toggleStatus'])->name('pulau.toggleStatus');
     Route::resource('pulau', PulauController::class);
@@ -58,4 +61,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('dipo-lokomotif/{id}/toggle-status', [DipoLokomotifController::class, 'toggleStatus'])->name('dipo-lokomotif.toggleStatus');
     Route::resource('dipo-lokomotif', DipoLokomotifController::class);
+
+    Route::post('dipo-kereta/{id}/toggle-status', [DipoKeretaController::class, 'toggleStatus'])->name('dipo-kereta.toggleStatus');
+    Route::resource('dipo-kereta', DipoKeretaController::class);
 });

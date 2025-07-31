@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Data Dipo Lokomotif</title>
+    <title>Tambah Data Dipo Kereta</title>
     <link rel="icon" type="image/png" href="{{ asset('image/logo-kai.jpg') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -21,7 +21,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Edit Dipo Lokomotif</h1>
+                        <h1 class="m-0">Tambah Data Dipo Kereta Baru</h1>
                     </div>
                 </div>
             </div>
@@ -30,23 +30,22 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <div class="card card-warning">
+                <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-edit"></i> Form Edit Dipo Lokomotif</h3>
+                        <h3 class="card-title"><i class="fas fa-plus-circle"></i> Form Tambah Dipo Kereta</h3>
                     </div>
                     <div class="card-body">
                         @if(session('error'))
                             <div class="alert alert-danger">{{ session('error') }}</div>
                         @endif
 
-                        <form action="{{ route('dipo-lokomotif.update', $dipoLokomotif->id) }}" method="POST">
+                        <form action="{{ route('dipo-kereta.store') }}" method="POST">
                             @csrf
-                            @method('PUT')
 
                             <div class="form-group">
                                 <label for="nama_dipo">Nama Dipo</label>
                                 <input type="text" class="form-control @error('nama_dipo') is-invalid @enderror"
-                                       name="nama_dipo" value="{{ old('nama_dipo', $dipoLokomotif->nama_dipo) }}" required>
+                                       name="nama_dipo" value="{{ old('nama_dipo') }}" required placeholder="Masukkan nama dipo kereta" autocomplete="off">
                                 @error('nama_dipo')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -57,12 +56,10 @@
                                 <select name="daop_id" id="daop_id" class="form-control @error('daop_id') is-invalid @enderror">
                                     <option value="">-- Pilih Daerah Operasi --</option>
                                     @foreach($daops as $daop)
-                                        <option value="{{ $daop->id }}" {{ old('daop_id', $dipoLokomotif->daop_id) == $daop->id ? 'selected' : '' }}>
-                                            {{ $daop->nama_daop }}
-                                        </option>
+                                        <option value="{{ $daop->id }}" {{ old('daop_id') == $daop->id ? 'selected' : '' }}>{{ $daop->nama_daop }}</option>
                                     @endforeach
                                 </select>
-                                @error('daop_id')
+                                @error('kota_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -72,9 +69,7 @@
                                 <select name="kota_id" id="kota_id" class="form-control @error('kota_id') is-invalid @enderror">
                                     <option value="">-- Pilih Kota --</option>
                                     @foreach($kotas as $kota)
-                                        <option value="{{ $kota->id }}" {{ old('kota_id', $dipoLokomotif->kota_id) == $kota->id ? 'selected' : '' }}>
-                                            {{ $kota->kota }}
-                                        </option>
+                                        <option value="{{ $kota->id }}" {{ old('kota_id') == $kota->id ? 'selected' : '' }}>{{ $kota->kota }}</option>
                                     @endforeach
                                 </select>
                                 @error('kota_id')
@@ -85,7 +80,7 @@
                             <div class="form-group">
                                 <label for="alamat">Alamat</label>
                                 <textarea class="form-control @error('alamat') is-invalid @enderror"
-                                          name="alamat">{{ old('alamat', $dipoLokomotif->alamat) }}</textarea>
+                                          name="alamat" placeholder="Masukkan alamat balai yasa">{{ old('alamat') }}</textarea>
                                 @error('alamat')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -94,7 +89,7 @@
                             <div class="form-group">
                                 <label for="telepon">Telepon</label>
                                 <input type="text" class="form-control @error('telepon') is-invalid @enderror"
-                                       name="telepon" value="{{ old('telepon', $dipoLokomotif->telepon) }}">
+                                       name="telepon" value="{{ old('telepon') }}" placeholder="Masukkan nomor telepon (opsional)">
                                 @error('telepon')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -103,7 +98,7 @@
                             <div class="form-group">
                                 <label for="kepala_dipo">Kepala Dipo</label>
                                 <input type="text" class="form-control @error('kepala_dipo') is-invalid @enderror"
-                                       name="kepala_dipo" value="{{ old('kepala_dipo', $dipoLokomotif->kepala_dipo) }}">
+                                       name="kepala_dipo" value="{{ old('kepala_dipo') }}" placeholder="Masukkan nama kepala dipo (opsional)">
                                 @error('kepala_dipo')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -114,8 +109,8 @@
                                 <select class="form-control @error('status') is-invalid @enderror"
                                         name="status" required>
                                     <option value="">-- Pilih Status --</option>
-                                    <option value="1" {{ old('status', $dipoLokomotif->status) == '1' ? 'selected' : '' }}>Aktif</option>
-                                    <option value="0" {{ old('status', $dipoLokomotif->status) == '0' ? 'selected' : '' }}>Nonaktif</option>
+                                    <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>Aktif</option>
+                                    <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>Nonaktif</option>
                                 </select>
                                 @error('status')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -123,10 +118,10 @@
                             </div>
 
                             <div class="mt-4">
-                                <button type="submit" class="btn btn-warning text-white">
-                                    <i class="fas fa-save"></i> Update
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Simpan
                                 </button>
-                                <a href="{{ route('dipo-lokomotif.index') }}" class="btn btn-secondary">Batal</a>
+                                <a href="{{ route('dipo-kereta.index') }}" class="btn btn-secondary">Batal</a>
                             </div>
                         </form>
                     </div>

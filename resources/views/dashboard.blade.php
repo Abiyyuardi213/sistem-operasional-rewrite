@@ -33,6 +33,22 @@
     <div class="content-wrapper">
         <div class="content-header">
             <div class="container-fluid">
+                @if(session('success'))
+                    <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert" id="success-alert">
+                        <i class="fas fa-check-circle mr-2"></i> {{ session('success') }}
+                    </div>
+
+                    <script>
+                        setTimeout(function () {
+                            const alert = document.getElementById('success-alert');
+                            if (alert) {
+                                alert.classList.remove('show');
+                                alert.classList.add('fade');
+                                setTimeout(() => alert.remove(), 300);
+                            }
+                        }, 5000);
+                    </script>
+                @endif
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <h1 class="m-0">Dashboard</h1>
                     <ol class="breadcrumb float-sm-right mb-0">
@@ -149,6 +165,14 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
-<script src="{{ asset('resources/js/ToastScript.js') }}"></script>
+<script>
+    $(document).ready(function () {
+    let urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('message') || urlParams.has('error')) {
+        let toast = $('#toastNotification');
+        toast.toast({ autohide: true, delay: 3000 }).toast('show');
+    }
+});
+</script>
 </body>
 </html>

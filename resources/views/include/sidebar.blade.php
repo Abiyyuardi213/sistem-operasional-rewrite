@@ -179,6 +179,42 @@
                         </li>
                     </ul>
                 </li>
+
+                @php
+                    $isSarana = request()->is('dashboard-sarana*') ||
+                                request()->is('lokomotif*') ||
+                                request()->is('kereta*');
+                @endphp
+                <li class="nav-item has-treeview {{ $isSarana ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ $isSarana ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-folder-open text-primary"></i>
+                        <p>
+                            Master Sarana
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+
+                    <ul class="nav nav-treeview" style="{{ $isSarana ? 'display:block;' : '' }}">
+                        <li class="nav-item">
+                            <a href="{{ url('dashboard-sarana') }}" class="nav-link">
+                                <i class="fas fa-columns nav-icon text-secondary"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('lokomotif') }}" class="nav-link">
+                                <i class="fas fa-train nav-icon text-secondary"></i>
+                                <p>Master Lokomotif</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('kereta') }}" class="nav-link">
+                                <i class="fas fa-subway nav-icon text-secondary"></i>
+                                <p>Master Kereta</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     </div>

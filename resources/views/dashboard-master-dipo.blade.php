@@ -54,7 +54,20 @@
                             <div class="icon">
                                 <i class="fas fa-train"></i>
                             </div>
-                            <a href="{{ url('pulau') }}" class="small-box-footer">Lihat Detail <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="{{ url('dipo-lokomotif') }}" class="small-box-footer">Lihat Detail <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{ $totalDipoKereta ?? 0 }}</h3>
+                                <p>Total Dipo Kereta</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-subway"></i>
+                            </div>
+                            <a href="{{ url('dipo-kereta') }}" class="small-box-footer">Lihat Detail <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                 </div>

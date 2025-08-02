@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardMasterController;
 use App\Http\Controllers\DashboardPeranController;
 use App\Http\Controllers\DipoKeretaController;
 use App\Http\Controllers\DipoLokomotifController;
+use App\Http\Controllers\JenisKeretaController;
 use App\Http\Controllers\JenisLokomotifController;
 use App\Http\Controllers\KantorController;
 use App\Http\Controllers\KategoriResortController;
@@ -69,4 +70,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('jenis-lokomotif/{id}/toggle-status', [JenisLokomotifController::class, 'toggleStatus'])->name('jenis-lokomotif.toggleStatus');
     Route::resource('jenis-lokomotif', JenisLokomotifController::class);
+
+    Route::post('jenis-kereta/{id}/toggle-status', [JenisKeretaController::class, 'toggleStatus'])->name('jenis-kereta.toggleStatus');
+    Route::resource('jenis-kereta', JenisKeretaController::class);
 });

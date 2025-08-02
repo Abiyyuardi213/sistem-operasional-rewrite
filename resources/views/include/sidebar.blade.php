@@ -182,6 +182,7 @@
 
                 @php
                     $isSarana = request()->is('dashboard-sarana*') ||
+                                request()->is('jenis-lokomotif*') ||
                                 request()->is('lokomotif*') ||
                                 request()->is('kereta*');
                 @endphp
@@ -199,6 +200,12 @@
                             <a href="{{ url('dashboard-sarana') }}" class="nav-link">
                                 <i class="fas fa-columns nav-icon text-secondary"></i>
                                 <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('jenis-lokomotif') }}" class="nav-link">
+                                <i class="fas fa-train nav-icon text-secondary"></i>
+                                <p>Master Jenis Lokomotif</p>
                             </a>
                         </li>
                         <li class="nav-item">

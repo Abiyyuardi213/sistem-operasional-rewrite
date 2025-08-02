@@ -17,6 +17,7 @@ use App\Http\Controllers\PulauController;
 use App\Http\Controllers\ResortController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Models\JenisLokomotif;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -67,5 +68,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('dipo-kereta', DipoKeretaController::class);
 
     Route::post('jenis-lokomotif/{id}/toggle-status', [JenisLokomotifController::class, 'toggleStatus'])->name('jenis-lokomotif.toggleStatus');
-    Route::resource('jenis-lokomotif', DipoKeretaController::class);
+    Route::resource('jenis-lokomotif', JenisLokomotifController::class);
 });
